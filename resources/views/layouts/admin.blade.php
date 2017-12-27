@@ -9,6 +9,7 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/miCss.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <!-- Theme style -->
@@ -41,35 +42,33 @@
           </a>
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
-              
-              <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <small class="bg-red">Online</small>
-                  <span class="hidden-xs">Juan Carlos Arcila Díaz</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    
-                    <p>
-                      www.incanatoit.com - Desarrollando Software
-                      <small>www.youtube.com/jcarlosad7</small>
-                    </p>
-                  </li>
-                  
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Cerrar</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @guest
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
+                @else
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            <small class="bg-red">Online</small>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    Cerrar sesión
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @endguest
             </ul>
           </div>
 
@@ -92,8 +91,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/almacen/articulo"><i class="fa fa-circle-o"></i> Artículos</a></li>
-                <li><a href="/almacen/categoria"><i class="fa fa-circle-o"></i> Categorías</a></li>
+                <li><a href="{{ route('articulo.index') }}"><i class="fa fa-circle-o"></i> Artículos</a></li>
+                <li><a href="{{ route('categoria.index') }}"><i class="fa fa-circle-o"></i> Categorías</a></li>
               </ul>
             </li>
             
@@ -104,8 +103,8 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/compras/ingreso"><i class="fa fa-circle-o"></i> Ingresos</a></li>
-                <li><a href="/compras/proveedor"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+                <li><a href="{{ route('ingreso.index') }}"><i class="fa fa-circle-o"></i> Ingresos</a></li>
+                <li><a href="{{ route('proveedor.index') }}"><i class="fa fa-circle-o"></i> Proveedores</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -115,8 +114,8 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="ventas/venta"><i class="fa fa-circle-o"></i> Ventas</a></li>
-                <li><a href="/ventas/cliente"><i class="fa fa-circle-o"></i> Clientes</a></li>
+                <li><a href="{{ route('venta.index') }}"><i class="fa fa-circle-o"></i> Ventas</a></li>
+                <li><a href="{{ route('cliente.index') }}"><i class="fa fa-circle-o"></i> Clientes</a></li>
               </ul>
             </li>
                        
@@ -126,7 +125,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="configuracion/usuario"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                <li><a href="{{ route('usuario.index') }}"><i class="fa fa-circle-o"></i> Usuarios</a></li>
                 
               </ul>
             </li>

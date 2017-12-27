@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('code');
             $table->string('name')->unique();
             $table->integer('stock');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('image');
             $table->string('status');
             $table->integer('category_id')->unsigned();

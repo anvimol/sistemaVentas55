@@ -12,7 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::resource('almacen/categoria','CategoryController');
+Route::resource('almacen/articulo', 'ArticleController');
+Route::resource('compras/proveedor', 'ProviderController');
+Route::resource('compras/ingreso', 'IngresoController');
+Route::resource('ventas/cliente', 'ClientController');
+Route::resource('ventas/venta', 'VentaController');
+
+Route::resource('seguridad/usuario', 'UserController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{slug}', 'HomeController@index');
